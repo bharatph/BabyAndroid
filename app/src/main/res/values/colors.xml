@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#000</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#fff</color>
+
+    <color name="colorLightPrimary">#fff</color>
+    <color name="colorLightPrimaryDark">#c7c7cc</color>
+    <color name="colorLightAccent">#000</color>
+
+    <color name="dangerHard">#d63031</color>
+    <color name="dangerSoft">#ff7675</color>
+
+    <color name="neutralHard">#137EC5</color>
+    <color name="neutralSoft">#1592E6</color>
+
+    <color name="colorHardGrey">#ced6e0</color>
+    <color name="colorSoftGrey">#dfe4ea</color>
+
+    <color name="colorHardYellow">#f1c40f</color>
+    <color name="colorSoftYellow">#E9B44C</color>
+</resources>

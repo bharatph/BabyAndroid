@@ -1,0 +1,21 @@
+<resources>
+
+    <style name="AppTheme.TextViewStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="AppTheme.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:tint">?colorAccent</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorLightPrimary</item>
+        <item name="colorPrimaryDark">@color/colorLightPrimaryDark</item>
+        <item name="colorAccent">@color/neutralSoft</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextViewStyle</item>
+        <item name="imageButtonStyle">@style/AppTheme.ImageButton</item>
+        <item name="android:background">?colorPrimary</item>
+    </style>
+
+</resources>
