@@ -1,5 +1,7 @@
 package com.thing.baby
 
+import android.databinding.ObservableArrayList
+import android.databinding.ObservableList
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +16,11 @@ import com.thing.baby.model.Message
 import kotlinx.android.synthetic.main.activity_main.*
 import org.w3c.dom.Text
 import java.util.*
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.databinding.ObservableMap
+import android.databinding.ObservableMap.OnMapChangedCallback
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         emotionIndicator.emotion = Color.GRAY
+        val messages: ObservableList<Message> = ObservableArrayList()
 
-        var messages = arrayListOf(Message("#33333", "Hi!", Date())) //TODO Add Helper
 
         val adapter = MessageAdapter(this, messages)
         messagesRecyclerView.adapter = adapter
@@ -36,13 +43,11 @@ class MainActivity : AppCompatActivity() {
                     messageActionImageButton.setImageDrawable(getDrawable(R.drawable.ic_attachment))
                     messageActionImageButton.setOnClickListener {
                         messages.add(Message("baby", "I cannot read attachments as of now", Date()))
-                        adapter.notifyDataSetChanged()
                     }
                 } else {
                     messageActionImageButton.setImageDrawable(getDrawable(android.R.drawable.ic_menu_send))
                     messageActionImageButton.setOnClickListener {
                         messages.add(Message("#2323 2sdf$%$%", s.toString(), Date()))
-                        adapter.notifyDataSetChanged()
                         messagesRecyclerView.scrollToPosition(adapter.itemCount - 1)
                         s?.clear()
                     }
@@ -54,6 +59,34 @@ class MainActivity : AppCompatActivity() {
         }
         messageInputEditText.addTextChangedListener(TextWatcherL())
         messageInputEditText.text = null
+
+
+        messages.addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableList<Message>>() {
+            override fun onItemRangeRemoved(sender: ObservableList<Message>?, positionStart: Int, itemCount: Int) {
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onItemRangeMoved(
+                sender: ObservableList<Message>?,
+                fromPosition: Int,
+                toPosition: Int,
+                itemCount: Int
+            ) {
+            }
+
+            override fun onItemRangeInserted(sender: ObservableList<Message>?, positionStart: Int, itemCount: Int) {
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onItemRangeChanged(sender: ObservableList<Message>?, positionStart: Int, itemCount: Int) {
+            }
+
+            override fun onChanged(sender: ObservableList<Message>?) {
+            }
+        })
+
+        messages.add(Message("baby", "Hi", Date()))
+
     }
 //
 //    /**
