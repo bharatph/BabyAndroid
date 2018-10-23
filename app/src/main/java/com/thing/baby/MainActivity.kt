@@ -3,33 +3,38 @@ package com.thing.baby
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import com.thing.baby.adapter.MessageAdapter
 import com.thing.baby.model.Message
 import kotlinx.android.synthetic.main.activity_main.*
-import org.w3c.dom.Text
 import java.util.*
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.databinding.ObservableMap
-import android.databinding.ObservableMap.OnMapChangedCallback
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 
 class MainActivity : AppCompatActivity() {
+    var messages: ObservableList<Message> = ObservableArrayList()
+
+    fun requestInput(shortHint: String, longHint: String) {
+        //messageInputEditText.hint = shortHint
+        messages.add(Message("baby", false, longHint, Date()))
+    }
+
+    fun output(message: String) {
+        messages.add(Message("baby", false, message, Date()))
+    }
+
+    fun userInput(message: String) {
+        messages.add(Message("sender-uid", false, message, Date(), Random().nextInt(3)))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         emotionIndicator.emotion = Color.GRAY
-        val messages: ObservableList<Message> = ObservableArrayList()
 
 
         val adapter = MessageAdapter(this, messages)
@@ -42,12 +47,13 @@ class MainActivity : AppCompatActivity() {
                 if (s.isNullOrBlank()) {
                     messageActionImageButton.setImageDrawable(getDrawable(R.drawable.ic_attachment))
                     messageActionImageButton.setOnClickListener {
-                        messages.add(Message("baby", "I cannot read attachments as of now", Date()))
+                        messages.add(Message("sender-uid", true, "url", Date(), Message.READ))
+                        output("I cannot read attachments as of now")
                     }
                 } else {
                     messageActionImageButton.setImageDrawable(getDrawable(android.R.drawable.ic_menu_send))
                     messageActionImageButton.setOnClickListener {
-                        messages.add(Message("#2323 2sdf$%$%", s.toString(), Date()))
+                        userInput(messageInputEditText.text.toString())
                         messagesRecyclerView.scrollToPosition(adapter.itemCount - 1)
                         s?.clear()
                     }
@@ -58,12 +64,12 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         }
         messageInputEditText.addTextChangedListener(TextWatcherL())
-        messageInputEditText.text = null
-
+        messageInputEditText.text.clear()
+        messageInputEditText.requestFocus()
 
         messages.addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableList<Message>>() {
             override fun onItemRangeRemoved(sender: ObservableList<Message>?, positionStart: Int, itemCount: Int) {
-                adapter.notifyDataSetChanged()
+                adapter.notifyItemRangeRemoved(positionStart, itemCount)
             }
 
             override fun onItemRangeMoved(
@@ -75,19 +81,27 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onItemRangeInserted(sender: ObservableList<Message>?, positionStart: Int, itemCount: Int) {
-                adapter.notifyDataSetChanged()
+                adapter.notifyItemRangeInserted(positionStart, itemCount)
             }
 
             override fun onItemRangeChanged(sender: ObservableList<Message>?, positionStart: Int, itemCount: Int) {
+                adapter.notifyItemRangeChanged(positionStart, itemCount)
             }
 
             override fun onChanged(sender: ObservableList<Message>?) {
             }
         })
 
-        messages.add(Message("baby", "Hi, thanks for participating in this experiment", Date()))
-        messages.add(Message("baby", "Tell anything and I will learn", Date()))
+        output("Hi, thanks for participating in this experiment")
+        output("Tell anything and I will learn")
 
+        register()
+
+    }
+
+    private fun register() {
+        output("To identify you across devices, we need you to sign in")
+        requestInput("Enter email address", "Enter your email id to proceed")
     }
 //
 //    /**

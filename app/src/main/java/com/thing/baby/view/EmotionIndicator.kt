@@ -1,17 +1,19 @@
-package com.thing.baby
+package com.thing.baby.view
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.View
+import com.thing.baby.R
 
 class EmotionIndicator : View {
-
     val ANGRY = Color.RED
-    val CALM = Color.BLUE
+    val CALM = ResourcesCompat.getColor(resources, R.color.neutralSoft, context.theme)
     val FEAR = Color.YELLOW
+
 
     var emotion = CALM
 
@@ -35,7 +37,6 @@ class EmotionIndicator : View {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        init()
-        canvas?.drawCircle(100f, 100f, 100f, emotionPaint)
+        canvas?.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), width.toFloat() / 2, emotionPaint)
     }
 }

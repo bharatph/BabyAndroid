@@ -7,7 +7,7 @@
 
     <dimen name="message_input_bg_radius">12dp</dimen>
 
-    <dimen name="default_text_size">20sp</dimen>
+    <dimen name="default_text_size">16sp</dimen>
     <dimen name="message_item_bg_radius">8dp</dimen>
     <dimen name="message_item_min_width">100dp</dimen>
 

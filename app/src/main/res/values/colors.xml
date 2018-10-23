@@ -6,14 +6,14 @@
     <color name="colorAccent">#fff</color>
 
     <color name="colorLightPrimary">#fff</color>
-    <color name="colorLightPrimaryDark">#c7c7cc</color>
+    <color name="colorLightPrimaryDark">#e7e7e7</color>
     <color name="colorLightAccent">#000</color>
 
     <color name="dangerHard">#d63031</color>
     <color name="dangerSoft">#ff7675</color>
 
     <color name="neutralHard">#17c0eb</color>
-    <color name="neutralSoft">#18dcff</color>
+    <color name="neutralSoft">#bef</color>
 
     <color name="colorHardGrey">#ced6e0</color>
     <color name="colorSoftGrey">#dfe4ea</color>

@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Baby</string>
-    <string name="message_input_hint">Message...</string>
+    <string name="message_input_hint">Type message here</string>
 </resources>
