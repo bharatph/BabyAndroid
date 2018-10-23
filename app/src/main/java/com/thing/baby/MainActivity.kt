@@ -85,7 +85,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        messages.add(Message("baby", "Hi", Date()))
+        messages.add(Message("baby", "Hi, thanks for participating in this experiment", Date()))
+        messages.add(Message("baby", "Tell anything and I will learn", Date()))
 
     }
 //

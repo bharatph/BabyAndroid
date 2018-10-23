@@ -12,7 +12,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorLightPrimary</item>
         <item name="colorPrimaryDark">@color/colorLightPrimaryDark</item>
-        <item name="colorAccent">@color/neutralSoft</item>
+        <item name="colorAccent">@color/colorSoftYellow</item>
         <item name="android:textViewStyle">@style/AppTheme.TextViewStyle</item>
         <item name="imageButtonStyle">@style/AppTheme.ImageButton</item>
         <item name="android:background">?colorPrimary</item>
